@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+{% block content %}
+  <h1 class="display-4 text-center">Expense Tracker</h1>
+
+  <form method="POST" enctype="multipart/form-data">
+
+    <!-- Security token -->
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-sm-3">
+        {{ form.price }}
+      </div>
+      <div class="col-sm-3">
+        {{ form.description }}
+      </div>
+      <div class="col-sm-2">
+        {{ form.date }}
+      </div>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-success">Credit</button>
+      </div>
+      <div>
+        <input type="hidden" name="user" value="{{ request.user.id }}">
+        <input type="hidden" name="status" value="Credit">
+      </div>
+    </div>
+  </form>
+  <div class="row m-2">
+  </div>
+
+  <form method="POST" enctype="multipart/form-data">
+    <div class="row">
+      {% csrf_token %}
+      <div class="col-sm-3">
+        {{ form.price }}
+      </div>
+      <div class="col-sm-3">
+        {{ form.description }}
+      </div>
+      <div class="col-sm-2">
+        {{ form.date }}
+      </div>
+      <div class="col">
+        <input type="hidden" name="user" value="{{ request.user.id }}">
+        <button type="submit" class="btn btn-warning">Debit</button>
+      </div>
+      <input type="hidden" name="status" value="Debit">
+    </div>
+
+  </form>
+  <h2 class="display-6"> Balance : {{ balance }}</h2>
+  <table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Date</th>
+      <th scope="col">description</th>
+      <th scope="col">credit</th>
+      <th scope="col">debit</th>
+      <th scope="col">price</th>
+      <th scope="col">Balance</th>
+      <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for expance in data %}
+    <tr>
+    <td>{{ expance.date }}</td>
+      <td>{{ expance.description }}</td>
+      <td>{% if expance.status == 'Credit' %}{{ expance.status }}{% endif %}</td>
+      <td>{% if expance.status == 'Debit' %}{{ expance.status }}{% endif %}</td>
+      <td>{{ expance.price }}</td>
+      <td>{{ expance.balance }}</td>
+      <td><a href="{% url 'deleteexp' expance.id %}" class="btn btn-outline-danger">  Delete </a>
+      </td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+{% endblock %}
+
+</body>
+</html>
