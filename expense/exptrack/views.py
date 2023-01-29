@@ -26,7 +26,8 @@ class ExpanseCreate(CreateView):
         context = super().get_context_data(**kwargs)
         if context:
             context["data"] = ExpanseTracking.objects.all()
-            context["balance"] = context["data"][len(context["data"]) - 1].balance
+            if context["data"]:
+                context["balance"] = context["data"][len(context["data"]) - 1].balance
             context_object_name = self.get_context_object_name(self.object)
             if context_object_name:
                 context[context_object_name] = self.object
