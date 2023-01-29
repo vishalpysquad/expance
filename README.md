@@ -1,6 +1,8 @@
 # Expense Tracker
 
 ![img_1.png](img_1.png)
+![Screenshot from 2023-01-30 00-24-18](https://user-images.githubusercontent.com/95077852/215349194-98a21ba0-00d2-4785-8a2a-9e9593cd8fb8.png)
+
 
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
